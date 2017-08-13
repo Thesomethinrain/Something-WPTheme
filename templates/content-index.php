@@ -3,6 +3,10 @@
  * The default template for displaying content
  *
  */
+
+// Boucle de base
+while ( have_posts() ) : the_post();
+
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
@@ -28,3 +32,11 @@
 
 	<?php the_tags( '<footer class="entry-meta"><span class="tag-links">', '', '</span></footer>' ); ?>
 </article><!-- #post-## -->
+
+
+<?php
+
+// Fin de la boucle
+endwhile;
+
+?>

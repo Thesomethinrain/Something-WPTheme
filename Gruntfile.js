@@ -28,10 +28,9 @@ grunt.initConfig({
 	// 2. la configuration pour la concaténation va ici.
 		dev: {
 			src: [
-			'src/js/vendor/**/*.js', // tous les JS dans vendor
-			'src/js/main.js'  // ce fichier là
+			'src/js/*.js', '!src/js/vendors/*.js' //'src/js/vendor/**/*.js', 'src/js/main.js'
 			],
-			dest: 'dist/global.js'
+			dest: 'dist/js/global.js'
 		}
 	},
 
@@ -40,10 +39,10 @@ grunt.initConfig({
 			options: {
 				mangle: false,
 				sourceMap: true,
-				sourceMapName: 'dist/app.map'
+				sourceMapName: 'dist/js/app.map'
 			},
 			files: {
-				'dist/global.js': ['js/vendor/**/*.js', 'js/main.js']
+				'dist/global.js': ['src/js/*.js', '!src/js/vendors/*.js'] //['js/vendor/**/*.js', 'js/main.js']
 			}
 		}
 	},
@@ -73,8 +72,21 @@ grunt.initConfig({
 	copy: {
 		fonts: {
 			expand: true,
-			src: 'src/fonts/*',
-			dest: 'dist/fonts/'
+			src: ['src/fonts/*'],
+			dest: 'dist/fonts',
+			flatten: true
+		},
+		jslibs: {
+			expand: true,
+			src: ['src/js/libs/*'],
+			dest: 'dist/js',
+			flatten: true
+		},
+		images: {			
+			expand: true,
+			src: 'src/images/*',
+			dest: 'dist/images',
+			flatten: true
 		}
 	},
 
@@ -83,7 +95,7 @@ grunt.initConfig({
 		options: {
 		//bundleExec: true,
 		httpPath: './',
-		cssDir: 'dist',
+		cssDir: 'dist/css',
 		sassDir: 'src/scss',
 		imagesDir: 'src/images',
 		javascriptsDir: 'src/js',
@@ -117,16 +129,43 @@ grunt.initConfig({
 			tasks: ['compass:dev']
 		},
 		scripts: {
-			files: ['src/js/*.js'],
+			files: ['src/js/*.js', '!src/js/vendors/*.js'],
 			tasks: ['concat'],
 			options: {
 				spawn: false,
 			},
 		},
+		php: {
+		  files: [ '*.php', '**/*.php' ],
+		  options: {
+		    reload: true
+		  }
+		},
+		 
+		copyfonts: {
+			files: ['src/fonts/*'],
+			tasks: ['copy:fonts'],
+			options: {
+				spawn: false,
+			}
+		},
+		 
+		copyjslibs: {
+			files: ['src/js/libs/*'],
+			tasks: ['copy:jslibs']
+		},
+		 
+		copyimages: {
+			files: ['src/images/*'],
+			tasks: ['copy:images'],
+			options: {
+				spawn: false,
+			}
+		},
+
 		options: {
 			livereload: true,
 		}
-
 	},
 
 	browserSync: {
@@ -153,14 +192,15 @@ grunt.loadNpmTasks('grunt-contrib-uglify');
 grunt.loadNpmTasks('grunt-contrib-compass');
 grunt.loadNpmTasks('grunt-contrib-imagemin');
 grunt.loadNpmTasks('grunt-svgmin');
+grunt.loadNpmTasks('grunt-contrib-copy');
 grunt.loadNpmTasks('grunt-contrib-watch');
 grunt.loadNpmTasks('grunt-browser-sync');
 
 
 // 4. Nous disons à Grunt quoi faire lorsque nous tapons "grunt" dans la console.
-grunt.registerTask('default', ['browserSync', 'watch']);
+grunt.registerTask('default', ['watch']); // ['browserSync', 'watch']
 grunt.registerTask('dev', ['watch']);
-grunt.registerTask('dist', ['jshint', 'uglify', 'compass:production', 'imagemin:production', 'svgmin:production']);
+grunt.registerTask('dist', ['jshint', 'uglify', 'compass:dist', 'copy', 'imagemin:production', 'svgmin:production']);
 
 
 

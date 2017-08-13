@@ -2,7 +2,10 @@
 @import "compass/css3";
 @import "compass/layout/grid-background";
 @import "compass/typography/vertical_rhythm";
-@import url(http://fonts.googleapis.com/css?family=Arvo|Lobster);
+@import url('https://fonts.googleapis.com/css?family=Raleway:100,400|Rokkitt:100,400,700');
+
+@import "susy";
+
 
 // Vars
 @import "vars";
@@ -18,6 +21,9 @@
 
 // Main
 @import "main";
+
+// Grid
+@import "grid";
 
 // STATE : mQueries, ...
 //@import "mqueries";

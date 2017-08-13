@@ -2,7 +2,7 @@
 // Include header.php
 get_template_part('templates/header');
 ?>
-<section id="content-container">
+<div id="content-container" class="">
 <?php
 // Page 404
 if ( !have_posts() ) : ?>
@@ -15,20 +15,31 @@ if ( !have_posts() ) : ?>
 </article>
 <?php
 endif;
+?>
 
-// Boucle de base
-while ( have_posts() ) : the_post();
+<?php if ( is_page(event) ) {
+
+// Charge le template de contenu adapté
+get_template_part( 'templates/content', 'event' );
+
+} else {
 
 // Charge le template de contenu adapté
 get_template_part( 'templates/content', 'index' );
 
-// Fin de la boucle
-endwhile;
+}
+
+?>
+
+
+<?php
+
+
 
 // Haut de la navigation
 //get_template_part( 'templates/nav', 'bottom' );
 ?>
-</section>
+</div>
 
 <?php
 // Include sidebar.php

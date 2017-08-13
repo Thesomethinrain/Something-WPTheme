@@ -1,0 +1,53 @@
+$susy: (
+  container: 960px,
+  columns: 12,
+  gutters: 1/4,
+  math: fluid,
+  output: float,
+  //gutter-position: inside,
+  debug: (image: show-columns)
+
+);
+
+#content-container {
+  @include container();
+  //width: container(80%);
+    }
+
+
+
+/* 960 et + */
+@media only screen and (min-width: 960px) {
+  .grid-item { 
+    width: 310px;
+  }
+
+  .grid-item--w2 { width: 620px; }
+
+}
+/* 956-768px */
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+
+  #content-container {
+    width: container(768px);
+  }
+
+  .grid-item, .grid-item--w2 { 
+    width: (376px);
+  }
+}
+
+/* 767-480px */
+@media only screen and (min-width: 480px) and (max-width: 767px) {
+
+  #content-container {
+    width: container(90%);
+  }
+
+
+}
+
+/* 479px */
+@media only screen and (max-width: 479px) {
+
+}

@@ -1,20 +1,22 @@
 /* Main
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
-article {
+.grid-item {
   background-color: #FFF;
-  padding: 1em;
-  margin: 1em 0;
   @include single-box-shadow(0, 0, 6px, 0px, #9b9b9b);
-
+  div {
+    padding: 1em;
+  }
 }
+
+
 
 /* Links
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 a {
   color: #1EAEDB;
   text-decoration: none;
-  font-family: 'Rokkitt', serif;
+  font-family: 'Amatic SC', Helvetica, Arial, sans-serif;//'Rokkitt', serif;
   font-weight: 700;
 }
 a:hover {
