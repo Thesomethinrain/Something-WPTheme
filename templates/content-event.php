@@ -1,6 +1,27 @@
 <?php
 
-$query = new WP_Query( array( 'post_type' => 'evenement' ) );
+add_filter('posts_orderby','customorderby');
+
+
+$argnext = array(
+	
+    
+	'post_type' => 'evenement',
+	'meta_key'		=> 'evt_date',
+	//'orderby'		=> 'meta_value_num',
+	//'order'			=> 'ASC',	
+	'meta_query' 	=> array(
+		array(
+            'key' => 'evt_date',
+            'value' => date('Y-m-d'),
+            'type' => 'DATE',
+            'compare' => '>='
+            )
+		)
+);
+
+
+$query = new WP_Query($argnext);
 
 ?>
 
@@ -22,9 +43,48 @@ $query = new WP_Query( array( 'post_type' => 'evenement' ) );
 			</article>
 		<?php endwhile; wp_reset_postdata(); ?>
 		<!-- show pagination here -->
-	</section><!-- #post-## -->
-<?php else : ?>
-	<!-- show 404 error here -->
-<?php endif; ?>
+		<?php else : ?>
+		<!-- show 404 error here -->
+	<?php endif; ?>
+
+</section><!-- #post-## -->
+
+<?php wp_reset_query(); ?>
+
+<?php
+
+$argpast = array(
+	
+    
+	'post_type' => 'evenement',
+	'meta_key'		=> 'evt_date',
+	'orderby'		=> 'meta_value_num',
+	'order'			=> 'ASC',	
+	'meta_query' 	=> array(
+		array(
+            'key' => 'evt_date',
+            'value' => date('Y-m-d'),
+            'type' => 'DATE',
+            'compare' => '<='
+            )
+		)
+);
+
+
+$query = new WP_Query($argpast);
+
+?>
+
+
+<section>
+	<?php if ( $query->have_posts() ) : ?>
+		<?php while ( $query->have_posts() ) : $query->the_post(); ?>   
+			<p><?php the_title(); ?> - <?php echo date_fr(); ?></p>
+		<?php endwhile; wp_reset_postdata(); ?>
+		<!-- show pagination here -->
+		<?php else : ?>
+			<!-- show 404 error here -->
+	<?php endif; ?>
+</section>
 
 

@@ -77,6 +77,24 @@ function date_fr() {
 }
 
 
+
+/**
+ * Sort by custom fields.
+ * mt1 refers to meta_1, mt2 to meta_2 and mt3 to meta_3
+ *
+ * @param $orderby original order by string
+ * @return custom order by string 
+ */
+function customorderby($orderby) {
+    return 'mt1.meta_value ASC';
+    //return 'mt1.meta_value, mt2.meta_value ASC';
+}
+function customorderbydesc($orderby) {
+    return 'mt1.meta_value DESC';
+    //return 'mt1.meta_value, mt2.meta_value DESC';
+}
+
+
 /* Ajout CustomPost */
 
 add_action('init', 'my_custom_post');
