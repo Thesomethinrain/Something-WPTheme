@@ -180,9 +180,10 @@ grunt.initConfig({
 				]
 			},
 			options: {
-				watchTask: true,
-				proxy: "local.dev/Site-CieLoba/",
-				port:8888			}
+                    proxy: "http://localhost/Site-SEB/03-Site/WP/",//"local.dev",
+                    //port: 8888,
+                    watchTask: true
+				}
 		}
 	}
 
