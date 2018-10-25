@@ -72,19 +72,22 @@ grunt.initConfig({
 	copy: {
 		fonts: {
 			expand: true,
-			src: ['src/fonts/*'],
+			cwd: 'src/fonts',
+			src: '**/*',
 			dest: 'dist/fonts',
 			flatten: true
 		},
 		jslibs: {
 			expand: true,
-			src: ['src/js/libs/*'],
-			dest: 'dist/js',
-			flatten: true
+			cwd: 'src/js/libs',
+			src: '**/*',
+			dest: 'dist/js/libs',
+			//flatten: true
 		},
 		images: {			
 			expand: true,
-			src: 'src/images/*',
+			cwd: 'src/images',
+			src: '**/*',
 			dest: 'dist/images',
 			flatten: true
 		}
